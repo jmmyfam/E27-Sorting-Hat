@@ -258,7 +258,6 @@ const expelStudent = (e) => {
     };
 
 //function to filter students by house
-
 const filter = (array, byHouse) => {
   const stuArray = [];
   
@@ -270,6 +269,7 @@ const filter = (array, byHouse) => {
     return stuArray;
   };
   
+
   const showAll = document.querySelector('#viewAll');
   const showGryff = document.querySelector('#viewGryff');
   const showHuff = document.querySelector('#viewHuff');
@@ -308,7 +308,7 @@ const filter = (array, byHouse) => {
            
 
   const assignHouse = () => {
-    // Get the input value from the form
+    // get input value from the form
     const studentName = document.getElementById('studentName').value;
 
     // display message if no input in name field
@@ -321,11 +321,11 @@ const filter = (array, byHouse) => {
     // generate a random ID for the new student
     const newId = students.length + 1;
   
-    // get a random house for the new student
+    // get random house for the new student
     const houses = ['Gryffindor', 'Hufflepuff', 'Ravenclaw', 'Slytherin'];
     const randomHouse = houses[Math.floor(Math.random() * houses.length)];
   
-    // create a new student object
+    // create new student object
     const newStudent = {
       name: studentName,
       id: newId,
@@ -340,7 +340,7 @@ const filter = (array, byHouse) => {
     // render the updated list of students
     cardsOnDom(sortedStudents);
   
-    // clear the form input field
+    // reset the form after submitting
     document.querySelector("form").reset();
   
     // display the sorting message
