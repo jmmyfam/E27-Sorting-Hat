@@ -147,211 +147,175 @@ let students = [
   }
 ];
 
-
-// hide/show form toggle function
+// Function to toggle form visibility
 const toggle = () => {
   const form = document.getElementById("form");
-  form.hidden = !form.hidden;
+  form.hidden = !form.hidden; // Toggles form visibility
 };
 
-// utility function
+// Utility function to render HTML to DOM
 const renderToDom = (divId, htmlToRender) => {
   const selectedDiv = document.querySelector(divId);
   selectedDiv.innerHTML = htmlToRender;
 };
 
-// render cards to DOM 
+// Function to render cards with delete buttons
 const cardsWithDelete = (array) => {
   array.sort((a, b) => a.name.localeCompare(b.name));
   let html = '';
   array.forEach((student) => {
     html += `<div class="card mb-3" style="max-width: 300px;">
-    <div class="row g-0">
-    <div class="col-md-4">
-    <img src="${student.image}" class="img-fluid rounded-start"  alt="..." style="background: transparent;" >
-    </div>
-    <div class="col-md-8">
-    <div class="card-body">
-    <h5 class="card-title" style="font-family: 'Harry Potter', sans-serif;">${student.name}</h5>
-    <p class="card-text">${student.house}</p>
-    </div>
-    </div>
-    </div>
-    <button id="expelButton--${student.id}" class="btn btn-danger" style="font-family: 'Harry Potter', sans serif">Expelliarmus</button>
-    </div>`
+      <div class="row g-0">
+        <div class="col-md-4">
+          <img src="${student.image}" class="img-fluid rounded-start"  alt="..." style="background: transparent;">
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title" style="font-family: 'Harry Potter', sans-serif;">${student.name}</h5>
+            <p class="card-text">${student.house}</p>
+          </div>
+        </div>
+      </div>
+      <button id="expelButton--${student.id}" class="btn btn-danger" style="font-family: 'Harry Potter', sans serif">Expelliarmus</button>
+    </div>`;
   });
-  
-  renderToDom('#students', html)
-  
-  document.querySelector('#students').addEventListener('click', expelStudent);
+  renderToDom('#students', html);
+  document.querySelector('#students').addEventListener('click', expelStudent); // Adds event listener for expelling students
 };
 
-// render cards w/o delete button 
+// Function to render cards without delete buttons
 const cardsOnDom = (array) => {
   let html = '';
   array.forEach((student) => {
     html += `<div class="card mb-3" style="max-width: 300px;">
-    <div class="row g-0">
-    <div class="col-md-4">
-    <img src="${student.image}" class="img-fluid rounded-start"  alt="..." style="background: transparent;" >
-    </div>
-    <div class="col-md-8">
-    <div class="card-body">
-    <h5 class="card-title" style="font-family: 'Harry Potter', sans-serif;">${student.name}</h5>
-    <p class="card-text">${student.house}</p>
-    </div>
-    </div>
-    </div>
-    </div>`
+      <div class="row g-0">
+        <div class="col-md-4">
+          <img src="${student.image}" class="img-fluid rounded-start"  alt="..." style="background: transparent;">
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title" style="font-family: 'Harry Potter', sans-serif;">${student.name}</h5>
+            <p class="card-text">${student.house}</p>
+          </div>
+        </div>
+      </div>
+    </div>`;
   });
-  
-  renderToDom('#students', html);
+  renderToDom('#students', html); // Renders cards without delete buttons to DOM
 };
 
-// cardsOnDom(students);
-// cardsNoDelete(students);
+const eStudents = []; // Empty array for expelled students
 
-
-// empty array for expelled students
-const eStudents = [];
-
-// expelled students on DOM 
+// Function to render expelled student cards on DOM
 const expelCardsOnDom = (array) => {
   let html = "";
-  for (const ex of array) {
+  array.forEach((ex) => {
     html += `<div class="card mb-3" style="max-width: 300px;">
-    <div class="row g-0">
-    <div class="col-md-4">
-    <img src="./images/death.png" class="img-fluid rounded-start"  alt="..." style="background: transparent;" >
-    </div>
-    <div class="col-md-8">
-    <div class="card-body">
-    <h5 class="card-title" style="font-family: 'Harry Potter', sans-serif;">${ex.name}</h5>
-    <p class="card-text">Death Eater<br>Formally ${ex.house}</p>
-    </div>
-    </div>
-    </div>
+      <div class="row g-0">
+        <div class="col-md-4">
+          <img src="./images/death.png" class="img-fluid rounded-start"  alt="..." style="background: transparent;">
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title" style="font-family: 'Harry Potter', sans-serif;">${ex.name}</h5>
+            <p class="card-text">Death Eater<br>Formally ${ex.house}</p>
+          </div>
+        </div>
+      </div>
     </div>`;
-  }
-  
-  
-  renderToDom("#expelled", html);
+  });
+  renderToDom("#expelled", html); // Renders expelled student cards to DOM
 };
 
-// function to delete 
+// Function to handle expelling a student
 const expelStudent = (e) => {
-  
   if (e.target.id.includes("expelButton")) {
     const [, studentId] = e.target.id.split('--');
+    const studentIndex = students.findIndex((stu) => Number(studentId) === stu.id);
+    const expelledStudent = students.splice(studentIndex, 1);
+    eStudents.push(expelledStudent[0]);
+    expelCardsOnDom(eStudents);
+    cardsWithDelete(students);
+  }
+};
 
-    const studentIndex = students.findIndex(
-      (stu) => Number(studentId) === stu.id 
-      );
-      
-        const expelledStudent = students.splice(studentIndex, 1);
-        
-        eStudents.push(expelledStudent[0]);
-
-
-        expelCardsOnDom(eStudents);
-        cardsWithDelete(students);
-      }
-    };
-
-//function to filter students by house
+// Function to filter students by house
 const filter = (array, byHouse) => {
   const stuArray = [];
-  
   for (const stu of array) {
     if (stu.house === byHouse) {
       stuArray.push(stu);
     }
   }
-    return stuArray;
+  return stuArray; // Returns filtered array of students by house
+};
+
+// Event listeners for filtering students by house
+const showAll = document.querySelector('#viewAll');
+const showGryff = document.querySelector('#viewGryff');
+const showHuff = document.querySelector('#viewHuff');
+const showRave = document.querySelector('#viewRave');
+const showSlyth = document.querySelector('#viewSlyth');
+
+showAll.addEventListener('click', () => {
+  students.sort((a, b) => a.name.localeCompare(b.name));
+  cardsWithDelete(students);
+  expelCardsOnDom(eStudents);
+});
+
+showGryff.addEventListener('click', () => {
+  const gryffs = filter(students, 'Gryffindor');
+  cardsOnDom(gryffs);
+  expelCardsOnDom(filter(eStudents, 'Gryffindor')); // show expelled students on DOM, filter to ensure they are displayed within their respective former houses
+});
+
+showHuff.addEventListener('click', () => {
+  const huffs = filter(students, 'Hufflepuff');
+  cardsOnDom(huffs);
+  expelCardsOnDom(filter(eStudents, 'Hufflepuff'));
+});
+
+showRave.addEventListener('click', () => {
+  const raves = filter(students, 'Ravenclaw');
+  cardsOnDom(raves);
+  expelCardsOnDom(filter(eStudents, 'Ravenclaw'));
+});
+
+showSlyth.addEventListener('click', () => {
+  const slyths = filter(students, 'Slytherin');
+  cardsOnDom(slyths);
+  expelCardsOnDom(filter(eStudents, 'Slytherin'));
+});          
+
+// Function to assign a house to a new student
+const assignHouse = (event) => {
+  event.preventDefault(); // Prevent default submission behavior
+  const studentName = document.getElementById('studentName').value; // Get input value from form
+
+  // Display message if no input in form
+  if (studentName.trim() === "") {
+    alert("Please enter your name");
+    return;
+  }
+  const newId = students.length + 1; // Generates random ID for new student
+
+  // Random house for new student
+  const houses = ['Gryffindor', 'Hufflepuff', 'Ravenclaw', 'Slytherin'];
+  const randomHouse = houses[Math.floor(Math.random() * houses.length)];
+
+  // Create new student object
+  const newStudent = {
+    name: studentName,
+    id: newId,
+    house: randomHouse,
+    image: `./images/${randomHouse.toLowerCase()}.png`
   };
-  
+  students.push(newStudent); // Add new student to students array
+  const sortedStudents = filter(students, randomHouse);
+  cardsOnDom(sortedStudents);
+  document.querySelector("form").reset();
+  document.getElementById('assignedHouse').innerHTML = `${studentName} has been assigned to ${randomHouse}!`; // Sorting messaging display
+};
 
-  const showAll = document.querySelector('#viewAll');
-  const showGryff = document.querySelector('#viewGryff');
-  const showHuff = document.querySelector('#viewHuff');
-  const showRave = document.querySelector('#viewRave');
-  const showSlyth = document.querySelector('#viewSlyth');
-  
-  showAll.addEventListener('click', () => {
-    students.sort((a, b) => a.name.localeCompare(b.name));
-    cardsWithDelete(students);
-    expelCardsOnDom(eStudents);
-  });
-    
-  
-  showGryff.addEventListener('click', () => {
-    const gryffs = filter(students, 'Gryffindor');
-    cardsOnDom(gryffs);
-    expelCardsOnDom(filter(eStudents, 'Gryffindor'));
-  });
-  
-  showHuff.addEventListener('click', () => {
-    const huffs = filter(students, 'Hufflepuff');
-    cardsOnDom(huffs);
-    expelCardsOnDom(filter(eStudents, 'Hufflepuff'));
-  });
-  
-  showRave.addEventListener('click', () => {
-    const raves = filter(students, 'Ravenclaw');
-    cardsOnDom(raves);
-    expelCardsOnDom(filter(eStudents, 'Ravenclaw'));
-  });
-  
-  showSlyth.addEventListener('click', () => {
-    const slyths = filter(students, 'Slytherin');
-    cardsOnDom(slyths);
-    expelCardsOnDom(filter(eStudents, 'Slytherin'));
-  });          
-           
-
-  const assignHouse = (event) => {
-    // prevent default form submission behavior
-    event.preventDefault();
-    // get input value from the form
-    const studentName = document.getElementById('studentName').value;
-    
-
-    // display message if no input in name field
-    if (studentName.trim() === "") {
-      alert("Please enter your name");
-      return;
-    }
-  
-  
-    // generate a random ID for the new student
-    const newId = students.length + 1;
-  
-    // get random house for the new student
-    const houses = ['Gryffindor', 'Hufflepuff', 'Ravenclaw', 'Slytherin'];
-    const randomHouse = houses[Math.floor(Math.random() * houses.length)];
-  
-    // create new student object
-    const newStudent = {
-      name: studentName,
-      id: newId,
-      house: randomHouse,
-      image: `./images/${randomHouse.toLowerCase()}.png`
-    };
-  
-    // add new student to the students array
-    students.push(newStudent);
-  
-    const sortedStudents = filter(students, randomHouse)
-    // render the updated list of students
-    cardsOnDom(sortedStudents);
-  
-    // reset the form after submitting
-    document.querySelector("form").reset();
-  
-    // display the sorting message
-    document.getElementById('assignedHouse').innerHTML = `${studentName} has been assigned to ${randomHouse}!`;
-  };
-  
-  // event listener for form submission
-  document.getElementById('submit').addEventListener('click', assignHouse);
-  
+// Form submission event listener
+document.getElementById('submit').addEventListener('click', assignHouse);
