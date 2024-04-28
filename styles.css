@@ -104,6 +104,8 @@ h1 {
 
 #submit:hover {
   transform: scale(1.15);
+  background-color: white;
+  color: black;
 }
 
 /* subhead */
