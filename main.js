@@ -162,6 +162,7 @@ const renderToDom = (divId, htmlToRender) => {
 
 // render cards to DOM 
 const cardsWithDelete = (array) => {
+  array.sort((a, b) => a.name.localeCompare(b.name));
   let html = '';
   array.forEach((student) => {
     html += `<div class="card mb-3" style="max-width: 300px;">
@@ -277,6 +278,7 @@ const filter = (array, byHouse) => {
   const showSlyth = document.querySelector('#viewSlyth');
   
   showAll.addEventListener('click', () => {
+    students.sort((a, b) => a.name.localeCompare(b.name));
     cardsWithDelete(students);
     expelCardsOnDom(eStudents);
   });
