@@ -309,9 +309,12 @@ const filter = (array, byHouse) => {
   });          
            
 
-  const assignHouse = () => {
+  const assignHouse = (event) => {
+    // prevent default form submission behavior
+    event.preventDefault();
     // get input value from the form
     const studentName = document.getElementById('studentName').value;
+    
 
     // display message if no input in name field
     if (studentName.trim() === "") {
