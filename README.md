@@ -1,4 +1,4 @@
-# Sorting Hat https://jpsortinghat.netlify.app
+# Sorting Hat https://thesortingceremony.netlify.app
 
 ## Goals
 
