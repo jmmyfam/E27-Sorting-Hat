@@ -147,19 +147,19 @@ let students = [
   }
 ];
 
-// Function to toggle form visibility
+// toggle form visibility
 const toggle = () => {
   const form = document.getElementById("form");
-  form.hidden = !form.hidden; // Toggles form visibility
+  form.hidden = !form.hidden; 
 };
 
-// Utility function to render HTML to DOM
+// util function
 const renderToDom = (divId, htmlToRender) => {
   const selectedDiv = document.querySelector(divId);
   selectedDiv.innerHTML = htmlToRender;
 };
 
-// Function to render cards with delete buttons
+// loop thru students array & render
 const cardsWithDelete = (array) => {
   array.sort((a, b) => a.name.localeCompare(b.name));
   let html = '';
@@ -180,10 +180,10 @@ const cardsWithDelete = (array) => {
     </div>`;
   });
   renderToDom('#students', html);
-  document.querySelector('#students').addEventListener('click', expelStudent); // Adds event listener for expelling students
+  document.querySelector('#students').addEventListener('click', expelStudent); // event listener for deleting students
 };
 
-// Function to render cards without delete buttons
+// loop & render no delete button
 const cardsOnDom = (array) => {
   let html = '';
   array.forEach((student) => {
@@ -201,12 +201,12 @@ const cardsOnDom = (array) => {
       </div>
     </div>`;
   });
-  renderToDom('#students', html); // Renders cards without delete buttons to DOM
+  renderToDom('#students', html);
 };
 
-const eStudents = []; // Empty array for expelled students
+const eStudents = []; // deleted students empty array
 
-// Function to render expelled student cards on DOM
+// render deleted students
 const expelCardsOnDom = (array) => {
   let html = "";
   array.forEach((ex) => {
@@ -224,14 +224,14 @@ const expelCardsOnDom = (array) => {
       </div>
     </div>`;
   });
-  renderToDom("#expelled", html); // Renders expelled student cards to DOM
+  renderToDom("#expelled", html); 
 };
 
-// Function to handle expelling a student
+// delete student function
 const expelStudent = (e) => {
   if (e.target.id.includes("expelButton")) {
     const [, studentId] = e.target.id.split('--');
-    const studentIndex = students.findIndex((stu) => Number(studentId) === stu.id);
+    const studentIndex = students.findIndex((student) => Number(studentId) === student.id);
     const expelledStudent = students.splice(studentIndex, 1);
     eStudents.push(expelledStudent[0]);
     expelCardsOnDom(eStudents);
@@ -239,7 +239,7 @@ const expelStudent = (e) => {
   }
 };
 
-// Function to filter students by house
+// filter students by house
 const filter = (array, byHouse) => {
   const stuArray = [];
   for (const stu of array) {
@@ -250,7 +250,7 @@ const filter = (array, byHouse) => {
   return stuArray; // Returns filtered array of students by house
 };
 
-// Event listeners for filtering students by house
+// Event listeners for filtering students
 const showAll = document.querySelector('#viewAll');
 const showGryff = document.querySelector('#viewGryff');
 const showHuff = document.querySelector('#viewHuff');
@@ -258,7 +258,7 @@ const showRave = document.querySelector('#viewRave');
 const showSlyth = document.querySelector('#viewSlyth');
 
 showAll.addEventListener('click', () => {
-  students.sort((a, b) => a.name.localeCompare(b.name));
+  students.sort((a, b) => a.name.localeCompare(b.name)); // sort alphabetically
   cardsWithDelete(students);
   expelCardsOnDom(eStudents);
 });
@@ -287,35 +287,48 @@ showSlyth.addEventListener('click', () => {
   expelCardsOnDom(filter(eStudents, 'Slytherin'));
 });          
 
-// Function to assign a house to a new student
-const assignHouse = (event) => {
-  event.preventDefault(); // Prevent default submission behavior
-  const studentName = document.getElementById('studentName').value; // Get input value from form
+// assign house to new student
+const assignHouse = (e) => {
+  e.preventDefault(); // prevent default submission behavior
+  const studentName = document.getElementById('studentName').value; // get input from form
 
-  // Display message if no input in form
+  // error message if submit no input
   if (studentName.trim() === "") {
     alert("Please enter your name");
     return;
   }
-  const newId = students.length + 1; // Generates random ID for new student
+  const newId = students.length + 1; // generate random id for new student
 
-  // Random house for new student
+  // random house for new student
   const houses = ['Gryffindor', 'Hufflepuff', 'Ravenclaw', 'Slytherin'];
   const randomHouse = houses[Math.floor(Math.random() * houses.length)];
 
-  // Create new student object
+  // new student object
   const newStudent = {
     name: studentName,
     id: newId,
     house: randomHouse,
     image: `./images/${randomHouse.toLowerCase()}.png`
   };
-  students.push(newStudent); // Add new student to students array
+  students.push(newStudent);
   const sortedStudents = filter(students, randomHouse);
   cardsOnDom(sortedStudents);
   document.querySelector("form").reset();
-  document.getElementById('assignedHouse').innerHTML = `${studentName} has been assigned to ${randomHouse}!`; // Sorting messaging display
+
+  // render sorting message dependant on random house
+  let sortingMessage = '';
+  if (randomHouse === 'Gryffindor') {
+    sortingMessage = `${studentName} huh? I sense bravery, courage & a hint of chivalry... where else but... Gryffindor!`;
+  } else if (randomHouse === 'Hufflepuff') {
+    sortingMessage = `Hmm.. hard work, patience, loyalty & fairness. ${studentName}, you have all the qualities of a... Hufflepuff!`;
+  } else if (randomHouse === 'Ravenclaw') {
+    sortingMessage = `Interesting... Intelligent, witty, and knowledgeable. I know just where to put you. ${studentName}, off to Ravenclaw you go!`;
+  } else if (randomHouse === 'Slytherin') {
+    sortingMessage = `Ahh.. I see... cunningness and resourcefulness, but above all else, ambition. ${studentName}, Slytherin will help you on the way to greatness!`;
+  }
+  
+  document.getElementById('assignedHouse').innerHTML = sortingMessage ; // display sorting message
 };
 
-// Form submission event listener
+// form submission event listener
 document.getElementById('submit').addEventListener('click', assignHouse);

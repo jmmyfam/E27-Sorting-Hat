@@ -82,7 +82,7 @@ h1 {
   justify-content: space-evenly;
   font-family: 'Harry Potter', sans-serif;
   opacity: 0; 
-  animation: slideInForm 2s forwards;
+  animation: slideInForm 1s forwards;
 }
 
 @keyframes slideInForm {
@@ -220,4 +220,9 @@ footer {
 
 footer p {
   margin-bottom: 1px;
+}
+
+#assignedHouse {
+  padding-left: 10px;
+  padding-right: 10px;
 }
