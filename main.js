@@ -258,7 +258,7 @@ const showRave = document.querySelector('#viewRave');
 const showSlyth = document.querySelector('#viewSlyth');
 
 showAll.addEventListener('click', () => {
-  students.sort((a, b) => a.name.localeCompare(b.name)); // sort alphabetically
+  students.sort; // sort alphabetically
   cardsWithDelete(students);
   expelCardsOnDom(eStudents);
 });
@@ -315,18 +315,24 @@ const assignHouse = (e) => {
   cardsOnDom(sortedStudents);
   document.querySelector("form").reset();
 
-  // render sorting message dependant on random house
-  let sortingMessage = '';
-  if (randomHouse === 'Gryffindor') {
+// render sorting message dependant on random house
+switch (randomHouse) {
+  case 'Gryffindor':
     sortingMessage = `${studentName} huh? I sense bravery, courage & a hint of chivalry... where else but... Gryffindor!`;
-  } else if (randomHouse === 'Hufflepuff') {
+    break;
+  case 'Hufflepuff':
     sortingMessage = `Hmm.. hard work, patience, loyalty & fairness. ${studentName}, you have all the qualities of a... Hufflepuff!`;
-  } else if (randomHouse === 'Ravenclaw') {
+    break;
+  case 'Ravenclaw':
     sortingMessage = `Interesting... Intelligent, witty, and knowledgeable. I know just where to put you. ${studentName}, off to Ravenclaw you go!`;
-  } else if (randomHouse === 'Slytherin') {
+    break;
+  case 'Slytherin': 
     sortingMessage = `Ahh.. I see... cunningness and resourcefulness, but above all else, ambition. ${studentName}, Slytherin will help you on the way to greatness!`;
-  }
-  
+    break;
+  default:
+    `I can't seem to determine where you belong`;
+}
+
   document.getElementById('assignedHouse').innerHTML = sortingMessage ; // display sorting message
 };
 
