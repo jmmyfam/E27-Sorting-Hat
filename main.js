@@ -1,157 +1,4 @@
-let students = [
-  {
-    name: 'Harry Potter',
-    id: 1,
-    house: 'Gryffindor',
-    image: './images/gryffindor.png'
-  },
-  {
-    name: 'Ron Weasley',
-    id: 2,
-    house: 'Gryffindor',
-    image: './images/gryffindor.png'
-  },
-  {
-    name: 'Hermione Granger',
-    id: 3,
-    house: 'Gryffindor',
-    image: './images/gryffindor.png'
-  },
-  {
-    name: 'Neville Longbottom',
-    id: 4,
-    house: 'Gryffindor',
-    image: './images/gryffindor.png'
-  },
-  {
-    name: 'Seamus Finnigan',
-    id: 5,
-    house: 'Gryffindor',
-    image: './images/gryffindor.png'
-  },
-  {
-    name: 'Remus Lupin',
-    id: 6,
-    house: 'Gryffindor',
-    image: './images/gryffindor.png'
-  },
-  {
-    name: 'Cedric Diggory',
-    id: 7,
-    house: 'Hufflepuff',
-    image: './images/hufflepuff.png'
-  },
-  {
-    name: 'Bridget Wenlock',
-    id: 8,
-    house: 'Hufflepuff',
-    image: './images/hufflepuff.png'
-  },
-  {
-    name: 'Fat Friar',
-    id: 9,
-    house: 'Hufflepuff',
-    image: './images/hufflepuff.png'
-  },
-  {
-    name: 'Silvanus Kettleburn',
-    id: 10,
-    house: 'Hufflepuff',
-    image: './images/hufflepuff.png'
-  },
-  {
-    name: 'Newton Scamander',
-    id: 11,
-    house: 'Hufflepuff',
-    image: './images/hufflepuff.png'
-  },
-  {
-    name: 'Pamona Sprout',
-    id: 12,
-    house: 'Hufflepuff',
-    image: './images/hufflepuff.png'
-  },
-  {
-    name: 'Cho Chang',
-    id: 13,
-    house: 'Ravenclaw',
-    image: './images/ravenclaw.png' 
-  },
-  {
-    name: 'Luna Lovegood',
-    id: 14,
-    house: 'Ravenclaw',
-    image: './images/ravenclaw.png'
-  },
-  {
-    name: 'Marcus Belby',
-    id: 15,
-    house: 'Ravenclaw',
-    image: './images/ravenclaw.png'
-  },
-  {
-    name: 'Filius Fitwick',
-    id: 16,
-    house: 'Ravenclaw',
-    image: './images/ravenclaw.png'
-  },
-  {
-    name: 'Padma Patil',
-    id: 17,
-    house: 'Ravenclaw',
-    image: './images/ravenclaw.png'
-  },
-  {
-    name: 'Uric the Oddball',
-    id: 18,
-    house: 'Ravenclaw',
-    image: './images/ravenclaw.png'
-  },
-  {
-    name: 'Draco Malfoy',
-    id: 19,
-    house: 'Slytherin',
-    image: './images/slytherin.png'
-  },
-  {
-    name: 'Severus Snape',
-    id: 20,
-    house: 'Slytherin',
-    image: './images/slytherin.png'
-  },
-  {
-    name: 'Tom Riddle',
-    id: 21,
-    house: 'Slytherin',
-    image: './images/slytherin.png'
-  },
-  {
-    name: 'Dolores Umbridge',
-    id: 22,
-    house: 'Slytherin',
-    image: './images/slytherin.png'
-  },
-
-  {
-    name: 'Marcus Flint',
-    id: 23,
-    house: 'Slytherin',
-    image: './images/slytherin.png'
-  },
-
-  {
-    name: 'Barnaby Lee',
-    id: 24,
-    house: 'Slytherin',
-    image: './images/slytherin.png'
-  }
-];
-
-// toggle form visibility
-const toggle = () => {
-  const form = document.getElementById("form");
-  form.hidden = !form.hidden; 
-};
+import students from './data/studentData.js'
 
 // util function
 const renderToDom = (divId, htmlToRender) => {
@@ -171,7 +18,7 @@ const cardsWithDelete = (array) => {
         </div>
         <div class="col-md-8">
           <div class="card-body">
-            <h5 class="card-title" style="font-family: 'Harry Potter', sans-serif;">${student.name}</h5>
+            <h5 class="card-title">${student.name}</h5>
             <p class="card-text">${student.house}</p>
           </div>
         </div>
@@ -187,19 +34,12 @@ const cardsWithDelete = (array) => {
 const cardsOnDom = (array) => {
   let html = '';
   array.forEach((student) => {
-    html += `<div class="card mb-3" style="max-width: 300px;">
-      <div class="row g-0">
-        <div class="col-md-4">
-          <img src="${student.image}" class="img-fluid rounded-start"  alt="..." style="background: transparent;">
-        </div>
-        <div class="col-md-8">
-          <div class="card-body">
-            <h5 class="card-title" style="font-family: 'Harry Potter', sans-serif;">${student.name}</h5>
-            <p class="card-text">${student.house}</p>
-          </div>
-        </div>
-      </div>
-    </div>`;
+    html += `<div class="card" style="width: 18rem;">
+    <img src="${student.image}" class="card-img-top" alt="House Sigil" style="background: transparent;">
+    <div class="card-body">
+      <h3 class="card-title">${student.name}</h3>
+    </div>
+  </div>`;
   });
   renderToDom('#students', html);
 };
@@ -217,7 +57,7 @@ const expelCardsOnDom = (array) => {
         </div>
         <div class="col-md-8">
           <div class="card-body">
-            <h5 class="card-title" style="font-family: 'Harry Potter', sans-serif;">${ex.name}</h5>
+            <h5 class="card-title">${ex.name}</h5>
             <p class="card-text">Death Eater<br>Formally ${ex.house}</p>
           </div>
         </div>
@@ -250,6 +90,28 @@ const filter = (array, byHouse) => {
   return stuArray; // Returns filtered array of students by house
 };
 
+const houseInfo = document.getElementById('houseinfo');
+
+function displayHouseInfo(house) {
+  let info = '';
+  switch (house) {
+    case 'Gryffindor': 
+    info = 'Welcome to <strong>House Gryffindor</strong>, founded by Godric Gryffindor.<br> Known for their unwavering courage, bravery, and determination.';
+      break;
+    case 'Hufflepuff':
+      info = 'Welcome to <strong>House Hufflepuff</strong>, founded by Helga Hufflepuff.<br> Renowned for being just, trustworthy, & loyal.';
+      break;
+    case 'Ravenclaw':
+      info = 'Welcome to <strong>House Ravenclaw</strong>, founded by Rowena Ravenclaw.<br> Acclaimed for their wisdom, wit, & intellect.';
+      break;
+    case 'Slytherin':
+      info = 'Welcome to <strong>House Slytherin</strong>, founded by Salazar Slytherin.<br> Notorious for their determination, resourcefulness, & ambition.'
+      break;
+    default:
+      break;
+  }
+  houseInfo.innerHTML = info;
+}
 // Event listeners for filtering students
 const showAll = document.querySelector('#viewAll');
 const showGryff = document.querySelector('#viewGryff');
@@ -261,30 +123,35 @@ showAll.addEventListener('click', () => {
   students.sort; // sort alphabetically
   cardsWithDelete(students);
   expelCardsOnDom(eStudents);
+  houseInfo.innerHTML = '';
 });
 
 showGryff.addEventListener('click', () => {
   const gryffs = filter(students, 'Gryffindor');
   cardsOnDom(gryffs);
-  expelCardsOnDom(filter(eStudents, 'Gryffindor')); // show expelled students on DOM, filter to ensure they are displayed within their respective former houses
+  expelCardsOnDom(filter(eStudents, 'Gryffindor'));
+  displayHouseInfo('Gryffindor');
 });
 
 showHuff.addEventListener('click', () => {
   const huffs = filter(students, 'Hufflepuff');
   cardsOnDom(huffs);
   expelCardsOnDom(filter(eStudents, 'Hufflepuff'));
+  displayHouseInfo('Hufflepuff');
 });
 
 showRave.addEventListener('click', () => {
   const raves = filter(students, 'Ravenclaw');
   cardsOnDom(raves);
   expelCardsOnDom(filter(eStudents, 'Ravenclaw'));
+  displayHouseInfo('Ravenclaw');
 });
 
 showSlyth.addEventListener('click', () => {
   const slyths = filter(students, 'Slytherin');
   cardsOnDom(slyths);
   expelCardsOnDom(filter(eStudents, 'Slytherin'));
+  displayHouseInfo('Slytherin');
 });          
 
 // assign house to new student
@@ -315,7 +182,8 @@ const assignHouse = (e) => {
   cardsOnDom(sortedStudents);
   document.querySelector("form").reset();
 
-// render sorting message dependant on random house
+  // render sorting message dependant on random house
+
 switch (randomHouse) {
   case 'Gryffindor':
     sortingMessage = `${studentName} huh? I sense bravery, courage & a hint of chivalry... where else but... Gryffindor!`;
