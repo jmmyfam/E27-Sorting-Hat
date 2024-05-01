@@ -1,71 +1,5 @@
-import students from './data/studentData.js'
-
-// util function
-const renderToDom = (divId, htmlToRender) => {
-  const selectedDiv = document.querySelector(divId);
-  selectedDiv.innerHTML = htmlToRender;
-};
-
-// loop thru students array & render
-const cardsWithDelete = (array) => {
-  array.sort((a, b) => a.name.localeCompare(b.name));
-  let html = '';
-  array.forEach((student) => {
-    html += `<div class="card mb-3" style="max-width: 300px;">
-      <div class="row g-0">
-        <div class="col-md-4">
-          <img src="${student.image}" class="img-fluid rounded-start"  alt="..." style="background: transparent;">
-        </div>
-        <div class="col-md-8">
-          <div class="card-body">
-            <h5 class="card-title">${student.name}</h5>
-            <p class="card-text">${student.house}</p>
-          </div>
-        </div>
-      </div>
-      <button id="expelButton--${student.id}" class="btn btn-danger" style="font-family: 'Harry Potter', sans serif">Expelliarmus</button>
-    </div>`;
-  });
-  renderToDom('#students', html);
-  document.querySelector('#students').addEventListener('click', expelStudent); // event listener for deleting students
-};
-
-// loop & render no delete button
-const cardsOnDom = (array) => {
-  let html = '';
-  array.forEach((student) => {
-    html += `<div class="card" style="width: 18rem;">
-    <img src="${student.image}" class="card-img-top" alt="House Sigil" style="background: transparent;">
-    <div class="card-body">
-      <h3 class="card-title">${student.name}</h3>
-    </div>
-  </div>`;
-  });
-  renderToDom('#students', html);
-};
-
-const eStudents = []; // deleted students empty array
-
-// render deleted students
-const expelCardsOnDom = (array) => {
-  let html = "";
-  array.forEach((ex) => {
-    html += `<div class="card mb-3" style="max-width: 300px;">
-      <div class="row g-0">
-        <div class="col-md-4">
-          <img src="./images/death.png" class="img-fluid rounded-start"  alt="..." style="background: transparent;">
-        </div>
-        <div class="col-md-8">
-          <div class="card-body">
-            <h5 class="card-title">${ex.name}</h5>
-            <p class="card-text">Death Eater<br>Formally ${ex.house}</p>
-          </div>
-        </div>
-      </div>
-    </div>`;
-  });
-  renderToDom("#expelled", html); 
-};
+import { students, eStudents } from './data/studentData.js'
+import { cardsWithDelete, cardsOnDom, expelCardsOnDom } from './components/cards.js';
 
 // delete student function
 const expelStudent = (e) => {
@@ -112,6 +46,7 @@ function displayHouseInfo(house) {
   }
   houseInfo.innerHTML = info;
 }
+
 // Event listeners for filtering students
 const showAll = document.querySelector('#viewAll');
 const showGryff = document.querySelector('#viewGryff');
@@ -206,3 +141,5 @@ switch (randomHouse) {
 
 // form submission event listener
 document.getElementById('submit').addEventListener('click', assignHouse);
+
+export { expelStudent };

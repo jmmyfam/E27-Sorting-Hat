@@ -99,11 +99,9 @@ h1 {
 /* sort me button */
 #submit {
   background-color: black;
-  transition: transform 0.3s ease;
 }
 
 #submit:hover {
-  transform: scale(1.15);
   background-color: white;
   color: black;
 }
@@ -217,14 +215,22 @@ h2 {
 
 .card {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: box-shadow 0.3s ease;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
+
+.card:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  transform: scale(1.02);
+
+}
+
 
 footer {
   text-align: center;
   padding: 10px;
   background-color: #f0f0f000;
   font-size: 14px; 
+  margin: auto;
 }
 
 footer p {
