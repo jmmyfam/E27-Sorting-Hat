@@ -119,6 +119,9 @@ h1 {
 .credits {
   font-size: 13px;
   color: rgba(0, 0, 0, 0.397);
+  float: right;
+  padding-right: 30px;
+  padding-top: 2px;
 }
 
 #sortbtns {
@@ -126,7 +129,7 @@ h1 {
   justify-content: space-around;
   margin-left: 100px;
   margin-right: 100px;
-  margin-bottom: 100px;
+  margin-bottom: 50px;
   font-family: 'Harry Potter', sans-serif;
 }
 
@@ -198,12 +201,18 @@ h1 {
 }
 
 /* cards */
-pre, .card-text {
-  font-family: 'Monday Ramen', sans-serif;
+h2 {
+  font-family: 'Dancing Script', sans-serif;
+  font-weight: 700;
+  font-size: 30px;
+  padding-left: 30px;
 }
 
 .card-title {
-  border-bottom: 1px solid;;
+  border-bottom: 1px solid;
+  text-align: center;
+  font-family: 'Dancing Script', cursive;
+  font-weight: bolder;
 }
 
 .card {
@@ -225,4 +234,21 @@ footer p {
 #assignedHouse {
   padding-left: 15px;
   padding-right: 15px;
+}
+
+#houseinfo {
+  text-align: center;
+  font-size: 20px;
+  margin-bottom: 50px;
+  font-family: 'Figtree', sans-serif;
+}
+
+.card-img-top {
+  display: flex;
+  width: 100px;
+  margin: auto;
+}
+
+.card-text {
+  font-family: 'Harry Potter', sans-serif;
 }
