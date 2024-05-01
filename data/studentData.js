@@ -147,4 +147,7 @@ let students = [
   }
 ];
 
-export default students;
+
+const eStudents = []; // deleted students empty array
+
+export { students, eStudents };
