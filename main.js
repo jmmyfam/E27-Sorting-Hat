@@ -55,7 +55,6 @@ const showRave = document.querySelector('#viewRave');
 const showSlyth = document.querySelector('#viewSlyth');
 
 showAll.addEventListener('click', () => {
-  students.sort; // sort alphabetically
   cardsWithDelete(students);
   expelCardsOnDom(eStudents);
   houseInfo.innerHTML = '';
@@ -118,7 +117,7 @@ const assignHouse = (e) => {
   document.querySelector("form").reset();
 
   // render sorting message dependant on random house
-
+let sortingMessage = '';
 switch (randomHouse) {
   case 'Gryffindor':
     sortingMessage = `${studentName} huh? I sense bravery, courage & a hint of chivalry... where else but... Gryffindor!`;
