@@ -3,7 +3,7 @@ import renderToDom from "../utils/renderToDom.js";
 
 // loop thru students array & render
 const cardsWithDelete = (array) => {
-  array.sort;
+  array.sort((a, b) => a.name.localeCompare(b.name));
   let html = '';
   array.forEach((student) => {
     html += `<div class="card mb-3" style="max-width: 300px;">
