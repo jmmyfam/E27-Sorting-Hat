@@ -4,13 +4,17 @@ import { cardsWithDelete, cardsOnDom, expelCardsOnDom } from './components/cards
 // delete student function
 const expelStudent = (e) => {
   if (e.target.id.includes("expelButton")) {
+    const confirmExpel = window.confirm('Are you sure you want to expel this student?');
+    if (!confirmExpel) {
+      return;
+    }
     const [, studentId] = e.target.id.split('--');
     const studentIndex = students.findIndex((student) => Number(studentId) === student.id);
     const expelledStudent = students.splice(studentIndex, 1);
     eStudents.push(expelledStudent[0]);
     expelCardsOnDom(eStudents);
     cardsWithDelete(students);
-  }
+  } 
 };
 
 // filter students by house
