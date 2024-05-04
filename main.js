@@ -24,8 +24,8 @@ const filter = (array, byHouse) => {
   return stuArray; // Returns filtered array of students by house
 };
 
+// conditionally render information on houses
 const houseInfo = document.getElementById('houseinfo');
-
 function displayHouseInfo(house) {
   let info = '';
   switch (house) {
@@ -41,6 +41,8 @@ function displayHouseInfo(house) {
     case 'Slytherin':
       info = 'Welcome to <strong>House Slytherin</strong>, founded by Salazar Slytherin.<br> Notorious for their determination, resourcefulness, & ambition.'
       break;
+    case 'Hogwarts':
+      info = `<strong><u>Hogwarts School of Witchcraft and Wizardry</u></strong><br>Students & Alumni`
     default:
       break;
   }
@@ -57,7 +59,7 @@ const showSlyth = document.querySelector('#viewSlyth');
 showAll.addEventListener('click', () => {
   cardsWithDelete(students);
   expelCardsOnDom(eStudents);
-  houseInfo.innerHTML = '';
+  displayHouseInfo(`Hogwarts`);
 });
 
 showGryff.addEventListener('click', () => {
