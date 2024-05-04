@@ -1,5 +1,9 @@
 # Sorting Hat https://thesortingceremony.netlify.app
 
+## Preview
+
+<img width='800' alt='app preview' src='/images/preview.png'>
+
 ## Goals
 
 1. Set up index.html
@@ -42,3 +46,9 @@
 7. Added favicon
 8. Used modules and separated my functions into different JS files
 9. Added confirmation window to expelStudent function
+
+## Styling Goals
+
+1. Animate the way my form shows when Sorting Hat is clicked
+2. Hover Effect On Cards
+3. Added different hover effects to buttons

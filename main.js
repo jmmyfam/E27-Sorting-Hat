@@ -4,6 +4,7 @@ import { cardsWithDelete, cardsOnDom, expelCardsOnDom } from './components/cards
 // delete student function
 const expelStudent = (e) => {
   if (e.target.id.includes("expelButton")) {
+    // confirmation window when expelling students
     const confirmExpel = window.confirm('Are you sure you want to expel this student?');
     if (!confirmExpel) {
       return;
