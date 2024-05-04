@@ -2,7 +2,7 @@
 
 ## Preview
 
-<img width='800' alt='app preview' src='/images/preview.png'>
+<img width='750' alt='app preview' src='/images/preview.png'>
 
 ## Goals
 
