@@ -38,7 +38,7 @@
 3. Sort array alphabetically when pressing the All Students button by using the .sort method as well as .localeCompare method
 4. I wanted a different message to display depending on which house the student is sorted into. Achieved this using switch/case
 5. Applied the same logic for different sorting message and used another switch/case to render different house info depending on which button is clicked
-6. All of my expelled students showed in everyone button initially, so I used the filter function to only render by former house
+6. All of my expelled students showed in every button initially, so I used the filter function to only render by former house
 7. Added favicon
 8. Used modules and separated my functions into different JS files
 9. Added confirmation window to expelStudent function
